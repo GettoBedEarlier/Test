@@ -1,0 +1,12 @@
+int FindEdge(int nVex, Edge aEdge[]){
+	int flag = 0;  //与景点n相邻的边的条数
+	//便利整个图的邻接矩阵
+	for (int j = 0; j < 20; j++) {
+		if (m_Graph.m_aAdjMatrix[nVex][j] != 0 && nVex!=j) {
+			aEdge[flag].vex1 = nVex;
+			aEdge[flag].vex2 = j;
+			aEdge[flag].weight = m_Graph.m_aAdjMatrix[nVex][j];
+			flag++;	}
+	}
+	return flag;
+}
