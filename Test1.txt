@@ -1,0 +1,26 @@
+void FindMinTree(Edge aPath[]){
+	bool aVisited[20] = { false };		//判断某顶点是否在最小生成树中，true表示已经添加到了最小生成树中
+	aVisited[0] = true;					//从0号顶点开始，加入到集合中
+	int min;
+	int nVex1, nVex2;	
+	for (int k = 0; k<m_Graph.m_nVexNum - 1; k++)	{
+		min = 0x7FFFFFFF;
+		for (int i = 0; i<m_Graph.m_nVexNum; i++)		{
+			if (aVisited[i]) //从集合中取一个顶点			{
+				for (int j = 0; j<m_Graph.m_nVexNum; j++)			{
+					if (!aVisited[j]) //从不在集合中的顶点 中取出一个顶点	{
+						if ((m_Graph.m_aAdjMatrix[i][j]<min) && (m_Graph.m_aAdjMatrix[i][j] != 0))		{
+							nVex1 = i;			nVex2 = j;		
+							min = m_Graph.m_aAdjMatrix[i][j]; //找出最短边
+						}
+					}
+				}
+			}
+		}
+		//保存最短边的两个顶点
+		aPath[k].vex1 = nVex1;		aPath[k].vex2 = nVex2;
+		aPath[k].weight = m_Graph.m_aAdjMatrix[nVex1][nVex2];
+		//将两个顶点加入集合
+		aVisited[nVex1] = true;		aVisited[nVex2] = true;
+	}
+}
